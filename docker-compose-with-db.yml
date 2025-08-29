@@ -1,3 +1,6 @@
+## This compose file creates a postgres instance on local machine 
+
+
 version: "3.8"
 
 services:
@@ -17,7 +20,7 @@ services:
       - zookeeper
     ports:
       - "9092:9092"
-      - "9093:9093"
+      - "9093:9093"   # External for host
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -26,11 +29,23 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
 
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5433:5432"  # host:container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testdb
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
   connect:
     image: debezium/connect:2.5
     platform: linux/amd64
     depends_on:
       - kafka
+      - postgres
       - zookeeper
     ports:
       - "8083:8083"

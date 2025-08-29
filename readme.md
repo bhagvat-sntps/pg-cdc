@@ -49,7 +49,7 @@ Http Type : POST
 
 ## Running kafka UI
 
-kafka UI exposed on `http://localhost:8080/`
+kafka UI exposed on `http://localhost   :8080/`
 
 ## Run message listner
 
@@ -63,7 +63,23 @@ Added node js script which listen to topic and add in logs , run with
 - delete the coonctor config reload and then create new one
 
 
-## refrences
+## Refrences
 - https://www.postgresql.org/docs/9.4/logicaldecoding-explanation.html
 - https://debezium.io/documentation/reference/3.1/connectors/postgresql.html#postgresql-in-the-cloud
 - https://www.youtube.com/watch?v=YNfQon8sC9w&t=39s
+
+
+## notes
+- enable wal_type 
+- create use which have assign REPLICATION enabled
+
+`sql
+
+SELECT rolname, rolsuper, rolreplication
+FROM pg_roles
+WHERE rolname = current_user;
+
+-- if not assign 
+ALTER ROLE USERNAME WITH REPLICATION;
+
+`

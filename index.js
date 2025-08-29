@@ -30,7 +30,7 @@ async function run() {
             const event = message.value.toString();
             const parsed = JSON.parse(event);
 
-            console.log('🟡 Event received:', JSON.stringify(parsed, null, 2));
+            //console.log('🟡 Event received:', JSON.stringify(parsed, null, 2));
 
             // You can process based on operation type
             const op = parsed.payload?.op;
