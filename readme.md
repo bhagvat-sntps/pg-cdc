@@ -7,10 +7,13 @@ this will build required images
     - zookeeper
     - debezium connector
 
-Hit below to cmd to run containers for above images
-
+Hit below to cmd to run containers for above images , 
 
 `$ docker-compose up --build`
+
+In case you are using local postgres , then use below one
+
+`$ docker compose --profile local-db up -d`
 
 -----
 
